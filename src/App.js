@@ -7,39 +7,26 @@ import useHttp from './hooks/use-http';
 
 function App() {
   const [tasks, setTasks] = useState([]);
-  useHttp({
-    url: 'https://lesson-e7547-default-rtdb.firebaseio.com/tasks.json',
-  });
 
-  const fetchTasks = async (taskText) => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const response = await fetch(
-        'https://lesson-e7547-default-rtdb.firebaseio.com/tasks.json'
-      );
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
-      if (!response.ok) {
-        throw new Error('Request failed!');
-      }
-
-      const data = await response.json();
-
+  useEffect(() => {
+    const transformTasks = (tasksObj) => {
       const loadedTasks = [];
 
-      for (const taskKey in data) {
-        loadedTasks.push({ id: taskKey, text: data[taskKey].text });
+      for (const taskKey in tasksObj) {
+        loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
       }
 
       setTasks(loadedTasks);
-    } catch (err) {
-      setError(err.message || 'Something went wrong!');
-    }
-    setIsLoading(false);
-  };
+    };
 
-  useEffect(() => {
-    fetchTasks();
+    fetchTasks(
+      {
+        url: 'https://lesson-e7547-default-rtdb.firebaseio.com/tasks.json',
+      },
+      transformTasks
+    );
   }, []);
 
   const taskAddHandler = (task) => {
