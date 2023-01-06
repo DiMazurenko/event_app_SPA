@@ -1,8 +1,16 @@
 import useInput from '../hooks/use-input';
 
+const validationName = (value) => /^[A-Za-z ]+$/.test(value);
+
+const validationEmail = (value) =>
+  String(value)
+    .toLowerCase()
+    .match(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+
 const BasicForm = (props) => {
   // name Validation
-  const validationName = (value) => value.trim() !== '';
 
   const {
     value: enteredName,
@@ -33,12 +41,6 @@ const BasicForm = (props) => {
     : 'form-control';
 
   //email validation
-  const validationEmail = (value) =>
-    String(value)
-      .toLowerCase()
-      .match(
-        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-      );
 
   const {
     value: enteredEmail,
@@ -57,6 +59,8 @@ const BasicForm = (props) => {
 
   const formSubmissionHandler = (event) => {
     event.preventDefault();
+
+    if (!formIsValid) return;
 
     resetNameInput();
     resetLastNameInput();
