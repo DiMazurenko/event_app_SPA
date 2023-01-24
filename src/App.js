@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import Cart from './components/Cart/Cart';
@@ -6,6 +7,14 @@ import Products from './components/Shop/Products';
 
 function App() {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
+  const cart = useSelector((state) => state.card);
+
+  useEffect(() => {
+    fetch('https://lesson-e7547-default-rtdb.firebaseio.com/cart.json/', {
+      method: 'PUT',
+      body: JSON.stringify(cart),
+    });
+  }, [cart]);
 
   return (
     <Layout>
