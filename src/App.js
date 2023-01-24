@@ -7,10 +7,10 @@ import Products from './components/Shop/Products';
 
 function App() {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
-  const cart = useSelector((state) => state.card);
+  const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    fetch('https://lesson-e7547-default-rtdb.firebaseio.com/cart.json/', {
+    fetch('https://lesson-e7547-default-rtdb.firebaseio.com/cart.json', {
       method: 'PUT',
       body: JSON.stringify(cart),
     });
