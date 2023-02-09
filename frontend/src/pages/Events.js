@@ -17,15 +17,16 @@ function EventsPage() {
 
 export default EventsPage;
 
-const loadEvents = async () => {
+async function loadEvents() {
   const response = await fetch('http://localhost:8080/events');
 
   if (!response.ok) {
-    // throw new Response(JSON.stringify({ message: 'Could not fetch events' }), {
+    // return { isError: true, message: 'Could not fetch events.' };
+    // throw new Response(JSON.stringify({ message: 'Could not fetch events.' }), {
     //   status: 500,
     // });
     throw json(
-      { message: 'Could not fetch events' },
+      { message: 'Could not fetch events.' },
       {
         status: 500,
       }
@@ -34,10 +35,10 @@ const loadEvents = async () => {
     const resData = await response.json();
     return resData.events;
   }
-};
+}
 
-export const loader = () => {
+export function loader() {
   return defer({
     events: loadEvents(),
   });
-};
+}

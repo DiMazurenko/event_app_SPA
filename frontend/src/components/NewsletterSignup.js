@@ -5,7 +5,6 @@ import classes from './NewsletterSignup.module.css';
 
 function NewsletterSignup() {
   const fetcher = useFetcher();
-
   const { data, state } = fetcher;
 
   useEffect(() => {
@@ -16,8 +15,8 @@ function NewsletterSignup() {
 
   return (
     <fetcher.Form
-      action="/newsletter"
       method="post"
+      action="/newsletter"
       className={classes.newsletter}
     >
       <input

@@ -4,7 +4,7 @@ import {
   useNavigation,
   useActionData,
   json,
-  redirect,
+  redirect
 } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
@@ -83,7 +83,7 @@ function EventForm({ method, event }) {
 
 export default EventForm;
 
-export const action = async ({ request, params }) => {
+export async function action({ request, params }) {
   const method = request.method;
   const data = await request.formData();
 
@@ -102,7 +102,7 @@ export const action = async ({ request, params }) => {
   }
 
   const response = await fetch(url, {
-    method,
+    method: method,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -112,9 +112,11 @@ export const action = async ({ request, params }) => {
   if (response.status === 422) {
     return response;
   }
+
   if (!response.ok) {
     throw json({ message: 'Could not save event.' }, { status: 500 });
   }
 
   return redirect('/events');
-};
+}
+
