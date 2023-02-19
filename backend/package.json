@@ -16,5 +16,8 @@
     "fs-promise": "^2.0.3",
     "jsonwebtoken": "^8.5.1",
     "uuid": "^9.0.0"
+  },
+  "engines": {
+    "node": "^14.18"
   }
 }
