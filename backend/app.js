@@ -6,6 +6,8 @@ const authRoutes = require('./routes/auth');
 
 const app = express();
 
+const port = process.env.PORT || 5000;
+
 app.use(bodyParser.json());
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -24,4 +26,4 @@ app.use((error, req, res, next) => {
   res.status(status).json({ message: message });
 });
 
-// app.listen(8080);
+app.listen(port);
