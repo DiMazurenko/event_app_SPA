@@ -6,6 +6,8 @@ Single Page Application for recording and displaying events. You can view schedu
 
 App publushed
 
+Backend server API made with Express.js and deploy at Render.com
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
