@@ -4,7 +4,7 @@
 
 Single Page Application for recording and displaying events. You can view scheduled events or register as a new user and make your own changes (edit, add or delete events).
 
-App publushed
+App publushed https://transcendent-kashata-5ae5ee.netlify.app
 
 Backend server API made with Express.js and deploy at Render.com
 
